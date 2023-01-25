@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load render_table from django_tables2 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Images</h5>
+                    {% if images.count == 0 %}
+                        No images have been uploaded yet.
+                    {% else %}
+                        {% render_table image_table %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Upload</h5>
+                    <p class="card-text">Fill out the form and press submit in order to upload a new image.</p>
+                    <form action="{% url "images:upload" %}" enctype="multipart/form-data" method="post">
+                        {% csrf_token %}
+                        {{ upload_form|crispy }}
+                        <input type="submit" class="btn btn-primary w-100" value="Upload">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
