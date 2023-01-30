@@ -50,7 +50,7 @@
   <body>
 
     <div class="mb-1">
-      <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #F26721;">
+      <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #808080;">
         <div class="container-fluid">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -65,7 +65,7 @@
                 <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Somethingp</a>
+                <a class="nav-link" href="">Something</a>
                 <!--{%comment%} {% url 'app:view' %} {%endcomment%}-->
               </li>
               <li class="nav-item">
@@ -81,7 +81,7 @@
                   <!--{%comment%} {% url 'app:view' %}{%endcomment%}-->
                   <li><a class="dropdown-item" href=""> Types</a></li>
                   <!--{%comment%}  {% url 'app:view' %}{%endcomment%}-->
-                  {%comment%} h {%endcomment%}
+
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="{% url 'images:all' %}">Images</a></li>
                 </ul>
@@ -89,8 +89,8 @@
 
               {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% translate "My Profile" %}</a>
+                  {# URL provided by django-allauth/account/urls.py #}{%comment%} {% url 'users:detail' request.user.username  %}{%endcomment%}
+                  <a class="nav-link" href="">{% translate "My Profile" %}</a>
                 </li>
                 <li class="nav-item">
                   {# URL provided by django-allauth/account/urls.py #}

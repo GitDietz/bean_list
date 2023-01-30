@@ -14,7 +14,7 @@ log = logging.getLogger('lista')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", default=True)
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '172.31.35.104', 'eblistdev-env.eba-9heqsubm.ap-southeast-2.elasticbeanstalk.com']
 
 # Application definition
 
