@@ -15,6 +15,7 @@ urlpatterns = [
     # path('users/', include('allauth.urls', namespace='users')),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('images/favicons/favicon.ico'))),
     re_path(r'^accounts/', include('allauth.urls')),
+    path('lists/', include('la.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<p class="font-italic">{% if notice %}{{ notice }}{% endif %}</p>
+<form method="POST" action="{% url 'lists:items_list' pk=list_pk %}" >{% csrf_token %}
+
+    <h1>Viewing list "{{ active_list }}"</h1>
+    {% if user_lists > 1 %} WIP
+    {% comment %}
+        <a href="{% url 'shop:group_select' %}" class="top-menu"><i class="far fa-random" title="Switch to other list"></i></a>
+      {% endcomment %}
+    {% endif %}<br>
+    {% if leader_list %}
+        Leader/s: {{ leader_list }}<br>
+    {% endif%}
+  <a href="{% url 'lists:merchant_list' pk=list_pk %}" class="top-menu">Merchants</a><br>
+  <a href="{% url 'lists:item_create' pk=list_pk %}" class="top-menu">Add item</a><br>
+{% if object_list%}
+
+{% for obj in object_list %}
+    <div class="row p-1 mb-2 bg-light text-dark">
+        <div class="col-md-6 col-xs-6">{{ obj.name_qty }}
+
+            {% if obj.to_get_from != None %}
+            <span class="text-info font-weight-light"> @ {{ obj.to_get_from }}
+            {% if obj.in_group != None %}{% endif %}
+            </span> {% endif %}
+        </div>
+        <div class="col-md-2 col-xs-2">
+
+          {% if request.user == obj.requested or is_leader %}
+            <button type="submit" name="got_item|{{ obj.id }}" class="btn btn-success btn-sm">
+              <i class="bi bi-check-circle" title="Done"></i>
+            </button>
+            <button type="submit" name="cancel_item|{{ obj.id }}" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-x-circle" title="Remove"></i>
+            </button>
+            <a href="{% url 'lists:item_edit' pk=obj.pk %}"><i class="bi bi-pen" title="Edit"></i></a>
+          {% endif %}
+          </div>
+        <div class="col-md-3 col-xs-3">
+          <p class="fs-6 fw-lighter">{{ obj.date_requested | date:"d M"}} ({{ obj.requested.first_name }})</p>
+        </div>
+
+
+    </div>
+{% endfor %}
+
+{% else %}
+    <p>No list yet!</p>
+{% endif %}
+</form>
+    <!--
+    <div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?{{ page_request_var }}={{ contacts.previous_page_number }}{% if request.Get.g %}&q={{ request.GET.q }}{% endif %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}{% if request.Get.g %}&q={{ request.GET.q }}{% endif %}">next</a>
+        {% endif %}
+    </span>
+    </div>
+-->
+
+{% endblock content %}

@@ -17,7 +17,7 @@ if 'mac' in hostname.lower() or '127.0' in ip_address:
         env.read_env()
         check_str = env("ENV_YOU_READ")
 
-print(f'Was Env read? {check_str}')
+# print(f'Was Env read? {check_str}')
 
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 SECRET_KEY = env("DJANGO_SKEY")
