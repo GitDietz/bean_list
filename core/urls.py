@@ -10,9 +10,8 @@ from .views import home
 
 urlpatterns = [
     path('', home, name='home'),
-    path('images/', include('images.urls')),
+    # path('images/', include('images.urls')),
     path('admin/', admin.site.urls),
-    # path('users/', include('allauth.urls', namespace='users')),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('images/favicons/favicon.ico'))),
     re_path(r'^accounts/', include('allauth.urls')),
     path('lists/', include('la.urls')),

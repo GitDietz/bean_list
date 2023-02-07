@@ -1,5 +1,8 @@
 on merchant list add link back to the list
 on item add view the back to list link goes elswhere not http://127.0.0.1:8000/lists/items_list/1
 add the other 3 users
-rename/crate Dad
-
+--rename/crate Dad
+add custom tags
+--clean up menu
+--remove urls for the files
+--now test

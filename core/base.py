@@ -113,8 +113,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 FIXTURE_DIRS = (str(BASE_DIR / "fixtures"),)
 
-# EMAIL
-# ------------------------------------------------------------------------------
+# EMAIL # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
@@ -133,8 +132,7 @@ ADMINS = [("""Dieter Thierry""", "africanmeats@gmail.com")]
 MANAGERS = ADMINS
 
 
-# LOGGING
-# ------------------------------------------------------------------------------
+# LOGGING # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#logging
 # See https://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
@@ -157,8 +155,7 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
 }
 
-# Celery
-# ------------------------------------------------------------------------------
+# Celery # ------------------------------------------------------------------------------
 if USE_TZ:
     # https://docs.celeryq.dev/en/stable/userguide/configuration.html#std:setting-timezone
     CELERY_TIMEZONE = TIME_ZONE
@@ -183,8 +180,7 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
 
-# django-allauth
-# ------------------------------------------------------------------------------
+# django-allauth # ------------------------------------------------------------------------------
 ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_AUTHENTICATION_METHOD = "email"

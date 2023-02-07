@@ -1,9 +1,12 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Forbidden (403){% endblock %}
 
 {% block content %}
 <h1>Forbidden (403)</h1>
+
+    <img src="{% static 'images/403.jpg' %}">
+
 
 <p>{% if exception %}{{ exception }}{% else %}You're not allowed to access this page.{% endif %}</p>
 {% endblock content %}
