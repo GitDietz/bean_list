@@ -64,37 +64,41 @@
               <li class="nav-item active">
                 <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="">Something</a>
-                <!--{%comment%} {% url 'app:view' %} {%endcomment%}-->
+                <a class="nav-link" href="{% url 'lists:user_lists' %}">Lists</a>
               </li>
+              {% comment %}
               <li class="nav-item">
                 <a class="nav-link" href="">other things</a>
-                <!--{%comment%} {% url 'app:view' %} {%endcomment%}-->
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Configuration
-                </a>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">Configuration</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="">Note Types</a></li>
-                  <!--{%comment%} {% url 'app:view' %}{%endcomment%}-->
+
                   <li><a class="dropdown-item" href=""> Types</a></li>
-                  <!--{%comment%}  {% url 'app:view' %}{%endcomment%}-->
+
 
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="{% url 'images:all' %}">Images</a></li>
                 </ul>
               </li>
-
-              {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}{%comment%} {% url 'users:detail' request.user.username  %}{%endcomment%}
+               <li class="nav-item">
+                  {# URL provided by django-allauth/account/urls.py #} {% url 'users:detail' request.user.username  %}
                   <a class="nav-link" href="">{% translate "My Profile" %}</a>
                 </li>
+              {% endcomment %}
+
+               {%comment%}  {% url 'app:view' %}{%endcomment%}
+               {%comment%} {% url 'app:view' %} {%endcomment%}
+              {%comment%} {% url 'app:view' %}{%endcomment%}
+              {% if request.user.is_authenticated %}
+
                 <li class="nav-item">
                   {# URL provided by django-allauth/account/urls.py #}
-                  <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
+                  <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %} {{request.user.username}}</a>
                 </li>
               {% else %}
                 {% if ACCOUNT_ALLOW_REGISTRATION %}

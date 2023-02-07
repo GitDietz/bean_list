@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+    Add item
+{% endblock head_title%}
+{% block content %}
+<h2>{{title}} for {{selected_list}}</h2>
+<div class="col-sm-8 col-sm-offset-2">
+    <a href="{% url 'lists:items_list' pk=list_pk %}" class="top-menu">Back to list</a><br>
+
+    <p class="font-italic">{% if notice %}{{ notice }}{% endif %}</p>
+    <form method='POST' action="" >
+        {% csrf_token %}
+
+        <div class="form-row">
+            <div class="form-group col-md-8 mb-0">
+                {{ form.description|as_crispy_field }}
+            </div>
+        </div><div class="form-row">
+            <div class="form-group col-md-3 mb-0">
+                {{ form.quantity|as_crispy_field }}
+            </div><div class="form-group col-md-5 mb-0">
+                {{ form.to_get_from|as_crispy_field }}
+            </div>
+        </div>
+
+        <input type='submit' class="btn btn-secondary" name="add_more" value = 'Add several to list'/>
+        <input type='submit' class="btn btn-secondary" name="add_one" value = 'Add one to list'/>
+    </form>
+
+</div>
+{% endblock content%}
+

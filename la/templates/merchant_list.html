@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1>{{ title }}</h1>
+<a href="{% url 'lists:items_list' pk=list.pk %}" class="top-menu">Back to list</a><br>
+<a href="{% url 'lists:merchant_create' pk=list.pk %}" class="top-menu">Add Merchant</a><br>
+
+<p class="font-italic">{% if notice %}{{ notice }}{% endif %}</p>
+{% if objects%}
+
+    {% for obj in objects %}
+        {{ form|crispy }}
+        <div class="row p-1 mb-2 bg-light text-dark">
+            <div class="col-md-8 col-xs-8">{{ obj.name }}</div>
+            <div class="col-md-4 col-xs-4">
+              <a href="{% url 'lists:merchant_update' pk=obj.pk %}"><i class="bi bi-pen"></i></a>
+              <a href="{% url 'lists:merchant_delete' pk=obj.pk %}"><i class="bi bi-trash3"></i></a>
+              <small>From {{ obj.date_added | date:"d M"}}</small>
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% else %}
+    <p>No list yet!</p>
+{% endif %}
+
+{% endblock content %}

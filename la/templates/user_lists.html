@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1>{{ title }}</h1>
+<a href="{% url 'lists:list_create' %}" class="top-menu">Add List</a><br>
+<p class="font-italic">{% if notice %}{{ notice }}{% endif %}</p>
+{% if member_list or managed_list %}
+ <form method="POST" action="." >
+     {% csrf_token %}
+    {{ form|crispy }}
+     Lists you are a Member of
+    {% for obj in member_list %}
+
+        <div class="row p-1 mb-2 bg-light text-dark">
+            <div class="col-md-8 col-xs-8">
+              <a  href="{% url 'lists:items_list' pk=obj.pk %}">
+               ({{ obj.id }})
+              </a>
+            {{ obj.name }}</div>
+            <div class="col-md-4 col-xs-4">
+                {# still need to change to url etc to process removing this user from the group#}
+              {%comment%}
+       <!--     <small><a onclick="return confirm_action('Are you sure you want to be removed from the group?')"
+                      href="{% url 'lists:group_remove_self' pk=obj.pk %}"><i class="far fa-sign-out-alt"></i></a>
+                From {{ obj.date_added | date:"d M"}} </small></div>  -->{% endcomment %}
+        </div>
+        </div>
+    {% endfor %}
+     {% if managed_list %}Lists you are a Manager for {% endif %}
+     {% for obj in managed_list %}
+
+        <div class="row p-1 mb-2 bg-light text-dark">
+            <div class="col-md-8 col-xs-8">
+              <a  href="{% url 'lists:items_list' pk=obj.pk %}">
+               ({{ obj.id }})
+              </a>
+                {{ obj.name }}</div>
+            <div class="col-md-4 col-xs-4">{%comment%}
+<!--            <small><a href="{% url 'lists:group_maintenance' pk=obj.pk %}"><i class="far fa-edit"></i></a>
+                <a href="{% url 'lists:group_delete' pk=obj.pk %}"><i class="far fa-trash-alt"></i></a>
+                From {{ obj.date_added | date:"d M"}} </small></div>
+    --> {% endcomment %}   </div>
+        </div>
+    {% endfor %}
+</form>
+
+{% else %}
+    <p>No list yet!</p>
+{% endif %}
+
+<script type="text/javascript">
+
+function confirm_action(in_message) {
+  var res = confirm(in_message);
+    if (res) {
+        return true;
+    } else {
+        return false;
+    }
+}
+</script>
+{% endblock content %}
+
