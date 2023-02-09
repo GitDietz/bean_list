@@ -117,11 +117,16 @@ FIXTURE_DIRS = (str(BASE_DIR / "fixtures"),)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
-    # default="django.core.mail.backends.smtp.EmailBackend",
-    default="django.core.mail.backends.console.EmailBackend"
+    default="django.core.mail.backends.smtp.EmailBackend",
+    # default="django.core.mail.backends.console.EmailBackend"
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = 1       # True
+EMAIL_PORT = 587 # 587  465
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PW')
 
 # ADMIN ------------------------------------------------------------------------------
 # Django Admin URL.
