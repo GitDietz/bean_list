@@ -26,4 +26,4 @@ postgres://mzluhrjb:QZ_cc-6HXPdpM5j3XDfwhZLw9aQllpUL@rosie.db.elephantsql.com/mz
 
 
 How to create zip file:
- zip -r lb_230130_1.zip . -x ".idea*" -x ".git*" -x "z_*.*" -x ".DS_Store*" -x "core/.env"
+ zip -r lb_230214_1.zip . -x ".idea*" -x ".git*" -x "z_*.*" -x ".DS_Store*" -x "core/.env"
