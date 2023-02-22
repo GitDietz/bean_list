@@ -57,7 +57,7 @@
                   aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a class="navbar-brand" href="{% url 'home' %}">My Lists</a>
+          <a class="navbar-brand" href="{% url 'home' %}">Listing</a>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -65,9 +65,6 @@
                 <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
               </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'lists:user_lists' %}">Lists</a>
-              </li>
               {% comment %}
               <li class="nav-item">
                 <a class="nav-link" href="">other things</a>
@@ -77,10 +74,7 @@
                    aria-expanded="false">Configuration</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="">Note Types</a></li>
-
                   <li><a class="dropdown-item" href=""> Types</a></li>
-
-
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="{% url 'images:all' %}">Images</a></li>
                 </ul>
@@ -90,12 +84,11 @@
                   <a class="nav-link" href="">{% translate "My Profile" %}</a>
                 </li>
               {% endcomment %}
-
-               {%comment%}  {% url 'app:view' %}{%endcomment%}
-               {%comment%} {% url 'app:view' %} {%endcomment%}
               {%comment%} {% url 'app:view' %}{%endcomment%}
               {% if request.user.is_authenticated %}
-
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'lists:user_lists' %}">Lists</a>
+              </li>
                 <li class="nav-item">
                   {# URL provided by django-allauth/account/urls.py #}
                   <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %} {{request.user.username}}</a>
