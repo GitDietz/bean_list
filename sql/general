@@ -1,0 +1,10 @@
+select * from auth_user;
+select * from la_list;
+select * from la_list_members;
+insert into la_list_members (list_id, user_id) values (1,3);
+
+select * from la_list_leaders;
+select * from la_item;
+
+select * from django_site
+select * from 

@@ -82,7 +82,8 @@ def is_user_leader(request, list_no):
 def is_user_associated(request, list_no):
     """"to return boolean indicating that the particular user is a member of the requested list"""
     log.info(f"user = {request.user.username}")
-    user_in_group = List.objects.filter(id=list_no).filter(members=request.user).first()
+    list_obj = List.objects.filter(id=list_no)
+    user_in_group = list_obj.filter(members=request.user).first()
     if user_in_group:
         log.info(f' user is member')
         return True
@@ -115,7 +116,8 @@ def user_lists(request):
 @login_required
 def list_detail(request, pk=None, list_obj=None):
     """
-
+    View to create or edit a list's details
+    url: http://127.0.0.1:8000/lists/list_create
     """
     log.info(f'user = {request.user.username}| id = {pk}')
     if pk:
@@ -147,7 +149,6 @@ def list_detail(request, pk=None, list_obj=None):
         'notice': '',
     }
     return render(request, template_name, context)
-
 
 
 #  ################################ LIST content #################################
@@ -269,11 +270,11 @@ def item_edit(request, pk):
     :return: back to the list
     """
     logging.info(f"view entered | user = {request.user.username}")
-    if not is_user_associated(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    active_list = item.in_group.id
+    if not is_user_associated(request, active_list):
         return render(request, '403.html')
     else:
-        item = get_object_or_404(Item, pk=pk)
-        active_list = item.in_group.id
         user_is_leader = False
         if request.user in item.in_group.leaders.all():
             user_is_leader = True

@@ -6,7 +6,7 @@ from django.urls import path, include, re_path
 
 
 from core import settings
-from .views import home
+from .views import home, junk
 
 urlpatterns = [
     path('', home, name='home'),
@@ -15,6 +15,7 @@ urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('images/favicons/favicon.ico'))),
     re_path(r'^accounts/', include('allauth.urls')),
     path('lists/', include('la.urls')),
+    re_path(r'^.*/$', junk, name='junk'),
 ]
 
 if settings.DEBUG:

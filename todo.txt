@@ -1,8 +1,15 @@
-on merchant list add link back to the list
-on item add view the back to list link goes elswhere not http://127.0.0.1:8000/lists/items_list/1
-add the other 3 users
+--on merchant list add link back to the list
+--on item add view the back to list link goes elswhere not http://127.0.0.1:8000/lists/items_list/1
+--add the other 3 users
 --rename/crate Dad
 add custom tags
 --clean up menu
 --remove urls for the files
 --now test
+--fix 403 on edit item (if i'm not leader or the creator of the item then i should not have the edit button)
+--fix email template - reads example.com
+fi menu to not show Lists option unless signed in
+also update homw page to be more vanilla
+
+
+

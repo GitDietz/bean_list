@@ -14,7 +14,7 @@ log = logging.getLogger('lista')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", default=True)
 
-ALLOWED_HOSTS = ['127.0.0.1', '172.31.35.104', 'eblistdev-env.eba-9heqsubm.ap-southeast-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(',')
 
 # Application definition
 
@@ -65,31 +65,6 @@ if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 DATABASES = {"default": env.db("DATABASE_URL"), }
-
-# if 'DB_NAME' in os.environ:
-#
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': os.environ['DB_NAME'],
-#             'USER': os.environ['DB_USER'],
-#             'PASSWORD': os.environ['DB_PW'],
-#             'HOST': os.environ['DB_HOSTNAME'],
-#             'PORT': os.environ['DB_PORT'],
-#         }
-#     }
-# else:
-#     print('DB config not from ENV!')
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': 'demos',
-#             'USER': '',
-#             'PASSWORD': '',
-#             'HOST': 'is-dataservice.cf02jphkvnsi.ap-southeast-2.rds.amazonaws.com',
-#             'PORT': '5432',
-#         }
-#         }
 
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

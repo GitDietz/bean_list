@@ -117,11 +117,16 @@ FIXTURE_DIRS = (str(BASE_DIR / "fixtures"),)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env(
     "DJANGO_EMAIL_BACKEND",
-    # default="django.core.mail.backends.smtp.EmailBackend",
-    default="django.core.mail.backends.console.EmailBackend"
+    default="django.core.mail.backends.smtp.EmailBackend",
+    # default="django.core.mail.backends.console.EmailBackend"
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = 1       # True
+EMAIL_PORT = 587 # 587  465
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PW')
 
 # ADMIN ------------------------------------------------------------------------------
 # Django Admin URL.
@@ -146,13 +151,27 @@ LOGGING = {
         }
     },
     "handlers": {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
         "console": {
-            "level": "DEBUG",
+            "level": "INFO",
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         }
     },
-    "root": {"level": "INFO", "handlers": ["console"]},
+    # "root": {"level": "INFO", "handlers": ["console"]},
+    "loggers": {
+        "django.security.DisallowedHost": {
+            'handlers': ['null'],
+            'propagate': False,
+        },
+        '': {
+            'handlers': ['console'],
+            'level': 'INFO'
+        }
+    }
 }
 
 # Celery # ------------------------------------------------------------------------------
@@ -181,7 +200,7 @@ CELERY_TASK_ALWAYS_EAGER = True
 CELERY_TASK_EAGER_PROPAGATES = True
 
 # django-allauth # ------------------------------------------------------------------------------
-ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
+ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", False)
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
