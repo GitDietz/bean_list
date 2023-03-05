@@ -2,20 +2,13 @@ from datetime import date
 from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
-from django.core.exceptions import ValidationError
 from django.urls import reverse
-from django.db import DatabaseError
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, Http404, redirect
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
 
-from core.decorators import check_user_permitted
 from .forms import NewListCreateForm, ItemForm
-    # ItemForm, MerchantForm, ListGroupForm, UsersGroupsForm, NewGroupCreateForm, SupportLogForm
 from .models import Item, Merchant, List, Support
 from .utils import in_post
-
 
 import logging
 log = logging.getLogger("info_logger")
