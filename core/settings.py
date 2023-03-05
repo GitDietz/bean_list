@@ -66,31 +66,6 @@ if 'AWS_STORAGE_BUCKET_NAME' in os.environ:
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 DATABASES = {"default": env.db("DATABASE_URL"), }
 
-# if 'DB_NAME' in os.environ:
-#
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': os.environ['DB_NAME'],
-#             'USER': os.environ['DB_USER'],
-#             'PASSWORD': os.environ['DB_PW'],
-#             'HOST': os.environ['DB_HOSTNAME'],
-#             'PORT': os.environ['DB_PORT'],
-#         }
-#     }
-# else:
-#     print('DB config not from ENV!')
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#             'NAME': 'demos',
-#             'USER': '',
-#             'PASSWORD': '',
-#             'HOST': 'is-dataservice.cf02jphkvnsi.ap-southeast-2.rds.amazonaws.com',
-#             'PORT': '5432',
-#         }
-#         }
-
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

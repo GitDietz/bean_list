@@ -1,12 +1,4 @@
-Environment details for: demoimage-dev
-  Application name: demoimage
-  Region: ap-southeast-2
-  Deployed Version: app-230112_100448279432
-  Environment ID: e-qp4he2pm7x
-  Platform: arn:aws:elasticbeanstalk:ap-southeast-2::platform/Python 3.8 running on 64bit Amazon Linux 2/3.4.3
-  Tier: WebServer-Standard-1.0
-  CNAME: demoimage-dev.ap-southeast-2.elasticbeanstalk.com
-  Updated: 2023-01-12 00:04:49.546000+00:00
+
 
 Having multiple starting scripts fail - I suspect its due to the fact that the env is activated on each call, perhaps it is already active?
 
@@ -22,8 +14,6 @@ Having multiple starting scripts fail - I suspect its due to the fact that the e
     leader_only: true
 
 
-postgres://mzluhrjb:QZ_cc-6HXPdpM5j3XDfwhZLw9aQllpUL@rosie.db.elephantsql.com/mzluhrjb
-
 
 How to create zip file:
- zip -r lb_230214_1.zip . -x ".idea*" -x ".git*" -x "z_*.*" -x ".DS_Store*" -x "core/.env"
+ zip -r lb_230220_1.zip . -x ".idea*" -x ".git*" -x "z_*.*" -x ".DS_Store*" -x "core/.env"
