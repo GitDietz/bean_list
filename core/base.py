@@ -151,13 +151,27 @@ LOGGING = {
         }
     },
     "handlers": {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
         "console": {
-            "level": "DEBUG",
+            "level": "INFO",
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         }
     },
-    "root": {"level": "INFO", "handlers": ["console"]},
+    # "root": {"level": "INFO", "handlers": ["console"]},
+    "loggers": {
+        "django.security.DisallowedHost": {
+            'handlers': ['null'],
+            'propagate': False,
+        },
+        '': {
+            'handlers': ['console'],
+            'level': 'INFO'
+        }
+    }
 }
 
 # Celery # ------------------------------------------------------------------------------

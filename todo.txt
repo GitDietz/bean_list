@@ -7,6 +7,9 @@ add custom tags
 --remove urls for the files
 --now test
 --fix 403 on edit item (if i'm not leader or the creator of the item then i should not have the edit button)
-fix email template - reads example.com
+--fix email template - reads example.com
+fi menu to not show Lists option unless signed in
+also update homw page to be more vanilla
+
 
 
