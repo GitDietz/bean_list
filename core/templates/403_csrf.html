@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Expired{% endblock %}
+
+{% block content %}
+<h1>Expired</h1>
+
+    <img src="{% static 'images/403.jpg' %}">
+
+
+<p>{% if exception %}{{ exception }}{% else %}Your session was used too long ago.
+    <br>Please log in again or navigate to the view again
+    {% endif %}</p>
+{% endblock content %}
