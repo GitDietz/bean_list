@@ -14,6 +14,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('images/favicons/favicon.ico'))),
     re_path(r'^accounts/', include('allauth.urls')),
+    path('billing/', include('bill.urls')),
     path('lists/', include('la.urls')),
     re_path(r'^.*/$', junk, name='junk'),
 ]

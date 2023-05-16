@@ -47,6 +47,7 @@ LOCAL_APPS = [
     # ".users",
     'images.apps.ImagesConfig',
     'la.apps.LaConfig',
+    'bill.apps.BillConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
