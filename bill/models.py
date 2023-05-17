@@ -114,6 +114,9 @@ class BillingRate(models.Model):
     billing_per = models.CharField(max_length=2, choices=BILL_CHOICE, default='h', blank=False, null=False)
     active = models.BooleanField(default=True)
 
+    class Meta:
+        unique_together = ('job', 'resource')
+
     def __str__(self):
         return self.resource.name + ' on ' + self.job.name.title()
 

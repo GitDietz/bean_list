@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<p class="font-italic">{% if notice %}{{ notice }}{% endif %}</p>
+Todo add button
+{% if objects%}
+
+{% for obj in objects %}
+    {{obj.pk}}Edit {{ obj }}<br>
+{% endfor %}
+
+{% else %}
+    <p>No list yet!</p>
+{% endif %}
+
+{% endblock content %}
