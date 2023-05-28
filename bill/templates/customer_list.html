@@ -2,11 +2,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <p class="font-italic">{% if notice %}{{ notice }}{% endif %}</p>
-Todo add button
+<h2> <a href="{% url 'billing:customer_add' %}"><i class="bi bi-plus-circle"></i></a></h2>
 {% if objects%}
 
 {% for obj in objects %}
-    {{obj.pk}}Edit {{ obj }}<br>
+    <i class="bi bi-pencil"></i>{{obj.pk}} {{ obj }}<br>
 {% endfor %}
 
 {% else %}

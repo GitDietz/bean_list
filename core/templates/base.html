@@ -68,23 +68,26 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'lists:user_lists' %}">Lists</a>
               </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">Billing</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url 'billing:customer' %}">Customers</a></li>
+                  <li><a class="dropdown-item" href="">Jobs</a></li>
+                  <li><a class="dropdown-item" href="">Invoices</a></li>
+                  <li><a class="dropdown-item" href="">Time</a></li>
+                  <li><a class="dropdown-item" href="">Resourcss</a></li>
+                  <li><a class="dropdown-item" href="">Rates</a></li>
+
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="">Images</a></li>
+                </ul>
+              </li>
               {% comment %}
               <li class="nav-item">
                 <a class="nav-link" href="">other things</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                   aria-expanded="false">Configuration</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="">Note Types</a></li>
 
-                  <li><a class="dropdown-item" href=""> Types</a></li>
-
-
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{% url 'images:all' %}">Images</a></li>
-                </ul>
-              </li>
                <li class="nav-item">
                   {# URL provided by django-allauth/account/urls.py #} {% url 'users:detail' request.user.username  %}
                   <a class="nav-link" href="">{% translate "My Profile" %}</a>

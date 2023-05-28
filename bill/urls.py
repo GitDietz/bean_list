@@ -10,7 +10,7 @@ app_name = 'billing'
 urlpatterns = [
     # customer
     path('customer', customer_all, name='customer'),
-    # re_path(r'customer_add/(?P<pk>\d+)', customer_add, name='customer_add'),
+    path('customer_add', customer_add, name='customer_add'),
     # re_path(r'customer_edit/(?P<pk>\d+)', customer_edit, name='customer_edit'),
 
         # # path(group_remove_self/(?P<pk>\d+)', StockNoteCreateView.as_view(), name='note_create'),
