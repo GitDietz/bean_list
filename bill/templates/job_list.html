@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<p class="font-italic">{% if notice %}{{ notice }}{% endif %}</p>
+<h2> <a href="{% url 'billing:customer_add' %}"><i class="bi bi-plus-circle"></i></a>{{title}}</h2>
+{% if objects%}
+
+{% for obj in objects %}
+    <a href="{% url 'billing:customer_edit' pk=obj.pk %}"><i class="bi bi-pencil"></i></a>
+    {{obj.pk}} {% if list_type='all' %}{{ obj } {% else %} {{obj.customer_job}} {% endif %}}<br>
+{% endfor %}
+
+{% else %}
+    <p>No list yet!</p>
+{% endif %}
+
+{% endblock content %}

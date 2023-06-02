@@ -6,7 +6,7 @@
 {% if objects%}
 
 {% for obj in objects %}
-    <i class="bi bi-pencil"></i>{{obj.pk}} {{ obj }}<br>
+    <a href="{% url 'billing:customer_edit' pk=obj.pk %}"><i class="bi bi-pencil"></i></a>{{obj.pk}} {{ obj }}<br>
 {% endfor %}
 
 {% else %}

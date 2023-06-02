@@ -40,160 +40,179 @@ def customer_add(request):
     :return: back to the list
     """
     log.info(f'user = {request.user.username}')
-    customers = Customer.objects.all().order_by('name')
-    notice = ''
+    form = CustomerForm(request.POST or None)
+    template = 'customer_create.html'
+    if request.method == "POST":
+        if form.is_valid():
+
+            item = form.save(commit=False)
+            item.name = form.cleaned_data['name'].title()
+            item.save()
+            return HttpResponseRedirect(reverse('billing:customer'))
+        else:
+            log.info(f'Error on form {form.errors}')
+            ...
+
+    template_name = 'merchant.html'
     context = {
-        'title': 'Customers',
-        'objects': customers,
-        'notice': notice,
+        'title': 'Create Customer',
+        'form': form,
+        'notice': '',
     }
-    return render(request, 'customer_list.html', context)
-    #
-    # form = CustomerForm(request.POST or None)
-    # template = 'customer_create.html'
-    # if request.method == "POST":
-    #     # log.info(f'from submitted')
-    #     if form.is_valid():
-    #
-    #         item = form.save(commit=False)
-    #         item.name = form.cleaned_data['name'].title()
-    #         item.save()
-    #         return reverse('billing:customer')
-    #     else:
-    #         # log.info(f'Error on form {form.errors}')
-    #         ...
-    #
-    # template_name = 'merchant.html'
-    # context = {
-    #     'title': 'Create Merchant',
-    #     'form': form,
-    #     'notice': '',
-    # }
-    # return render(request, template, context)
+    return render(request, template, context)
 
 
 def customer_edit(request, pk):
-    ...
-#   form reuse
-#   validations?
+    log.info(f'user = {request.user.username}')
+    customer = get_object_or_404(Customer, pk=pk)
+    form = CustomerForm(request.POST or None, instance=customer)
+    template = 'customer_create.html'
+    if request.method == "POST":
+        if form.is_valid():
+
+            item = form.save(commit=False)
+            item.name = form.cleaned_data['name'].title()
+            item.save()
+            return HttpResponseRedirect(reverse('billing:customer'))
+        else:
+            log.info(f'Error on form {form.errors}')
+            ...
+
+    template_name = 'merchant.html'
+    context = {
+        'title': 'Update Customer',
+        'form': form,
+        'notice': '',
+    }
+    return render(request, template, context)
 
 
 #  #########  Jobs  ################
 @login_required  # get allow specific users implemented
-def jobs_all(request):
+def jobs_all(request, ck):
     """
     list for customer
+    :param ck: customer key
     :param request:
     :return:
     """
     log.info(f'user = {request.user.username}')
-    customers = Job.objects.all().order_by('name')
+    template = 'job_list.html'
+    list_type = 'all'
+    customers = Job.objects.all().order_by('customer').order_by('date_added')
+    title = 'All Jobs'
+    if int(ck) > 0:
+        this_customer = Customer.objects.get(pk=ck)
+        customers.filter(customer=this_customer)
+        title += f' for {this_customer}'
+        list_type = 'customer'
     notice = ''
     context = {
-        'title': 'Customers',
+        'title': title,
         'objects': customers,
-        'notice': notice,
+        'notice': 'notice',
+        'list_type': list_type,
     }
-    return render(request, 'customer_list.html', context)
+    return render(request, template, context)
 
 
-def customer_add(request):
-    ...
-    # form, validations, model
-
-
-def customer_edit(request, pk):
-    ...
-#   form reuse
-#   validations?
-
-
-#  #########  CUSTOMERS  ################
-@login_required  # get allow specific users implemented
-def customer_all(request):
-    """
-    list for customer
-    :param request:
-    :return:
-    """
-    log.info(f'user = {request.user.username}')
-    customers = Customer.objects.all().order_by('name')
-    notice = ''
-    context = {
-        'title': 'Customers',
-        'objects': customers,
-        'notice': notice,
-    }
-    return render(request, 'customer_list.html', context)
-
-
-def customer_add(request):
-    ...
-    # form, validations, model
-
-
-def customer_edit(request, pk):
-    ...
-#   form reuse
-#   validations?
-
-
-#  #########  CUSTOMERS  ################
-@login_required  # get allow specific users implemented
-def customer_all(request):
-    """
-    list for customer
-    :param request:
-    :return:
-    """
-    log.info(f'user = {request.user.username}')
-    customers = Customer.objects.all().order_by('name')
-    notice = ''
-    context = {
-        'title': 'Customers',
-        'objects': customers,
-        'notice': notice,
-    }
-    return render(request, 'customer_list.html', context)
-
-
-def customer_add(request):
-    ...
-    # form, validations, model
-
-
-def customer_edit(request, pk):
-    ...
-#   form reuse
-#   validations?
-
-
-#  #########  CUSTOMERS  ################
-@login_required  # get allow specific users implemented
-def customer_all(request):
-    """
-    list for customer
-    :param request:
-    :return:
-    """
-    log.info(f'user = {request.user.username}')
-    customers = Customer.objects.all().order_by('name')
-    notice = ''
-    context = {
-        'title': 'Customers',
-        'objects': customers,
-        'notice': notice,
-    }
-    return render(request, 'customer_list.html', context)
-
-
-def customer_add(request):
-    ...
-    # form, validations, model
-
-
-def customer_edit(request, pk):
-    ...
-#   form reuse
+# def customer_add(request):
+#     ...
+#     # form, validations, model
+#
+#
+# def customer_edit(request, pk):
+#     ...
+# #   form reuse
+# #   validations?
+#
+#
+# #  #########  CUSTOMERS  ################
+# @login_required  # get allow specific users implemented
+# def customer_all(request):
+#     """
+#     list for customer
+#     :param request:
+#     :return:
+#     """
+#     log.info(f'user = {request.user.username}')
+#     customers = Customer.objects.all().order_by('name')
+#     notice = ''
+#     context = {
+#         'title': 'Customers',
+#         'objects': customers,
+#         'notice': notice,
+#     }
+#     return render(request, 'customer_list.html', context)
+#
+#
+# def customer_add(request):
+#     ...
+#     # form, validations, model
+#
+#
+# def customer_edit(request, pk):
+#     ...
+# #   form reuse
+# #   validations?
+#
+#
+# #  #########  CUSTOMERS  ################
+# @login_required  # get allow specific users implemented
+# def customer_all(request):
+#     """
+#     list for customer
+#     :param request:
+#     :return:
+#     """
+#     log.info(f'user = {request.user.username}')
+#     customers = Customer.objects.all().order_by('name')
+#     notice = ''
+#     context = {
+#         'title': 'Customers',
+#         'objects': customers,
+#         'notice': notice,
+#     }
+#     return render(request, 'customer_list.html', context)
+#
+#
+# def customer_add(request):
+#     ...
+#     # form, validations, model
+#
+#
+# def customer_edit(request, pk):
+#     ...
+# #   form reuse
+# #   validations?
+#
+#
+# #  #########  CUSTOMERS  ################
+# @login_required  # get allow specific users implemented
+# def customer_all(request):
+#     """
+#     list for customer
+#     :param request:
+#     :return:
+#     """
+#     log.info(f'user = {request.user.username}')
+#     customers = Customer.objects.all().order_by('name')
+#     notice = ''
+#     context = {
+#         'title': 'Customers',
+#         'objects': customers,
+#         'notice': notice,
+#     }
+#     return render(request, 'customer_list.html', context)
+#
+#
+# def customer_add(request):
+#     ...
+#     # form, validations, model
+#
+#
+# def customer_edit(request, pk):
+#     ...
+# #   form reuse
 #   validations?
 

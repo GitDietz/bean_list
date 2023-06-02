@@ -61,6 +61,9 @@ class Job(models.Model):
     def __str__(self):
         return self.name.title()
 
+    def customer_job(self):
+        return f'{self.customer} - {self.name}'
+
 
 class Invoice(models.Model):
     """

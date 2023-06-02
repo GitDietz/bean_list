@@ -4,16 +4,20 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views import defaults as default_views
 
-from .views import customer_all, customer_add, customer_edit
+from .views import (customer_all, customer_add, customer_edit,
+                    jobs_all)
+
 app_name = 'billing'
 
 urlpatterns = [
     # customer
     path('customer', customer_all, name='customer'),
     path('customer_add', customer_add, name='customer_add'),
-    # re_path(r'customer_edit/(?P<pk>\d+)', customer_edit, name='customer_edit'),
+    re_path(r'customer_edit/(?P<pk>\d+)', customer_edit, name='customer_edit'),
 
-        # # path(group_remove_self/(?P<pk>\d+)', StockNoteCreateView.as_view(), name='note_create'),
+    re_path(r'jobs/(?P<ck>\d+)', jobs_all, name='jobs_all'),
+
+    # # path(group_remove_self/(?P<pk>\d+)', StockNoteCreateView.as_view(), name='note_create'),
     # # path('note_update_ajax', note_update_ajax, name='note_update_ajax'),
     # path('list_create', list_detail, name='list_create'),
     # re_path(r'list_detail/(?P<pk>\d+)/(?P<list_obj>)', list_detail, name='list_detail'),

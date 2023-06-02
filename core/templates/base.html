@@ -73,7 +73,7 @@
                    aria-expanded="false">Billing</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{% url 'billing:customer' %}">Customers</a></li>
-                  <li><a class="dropdown-item" href="">Jobs</a></li>
+                  <li><a class="dropdown-item" href="{% url 'billing:jobs_all' ck=0 %}">Jobs</a></li>
                   <li><a class="dropdown-item" href="">Invoices</a></li>
                   <li><a class="dropdown-item" href="">Time</a></li>
                   <li><a class="dropdown-item" href="">Resourcss</a></li>
