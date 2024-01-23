@@ -4,6 +4,7 @@
 
 <h1>{{ title }}</h1>
 <a href="{% url 'lists:list_create' %}" class="top-menu">Add List</a><br>
+<a href="{% url 'lists:add_checklist' %}" class="top-menu">Add Checklist</a><br>
 <p class="font-italic">{% if notice %}{{ notice }}{% endif %}</p>
 {% if member_list or managed_list %}
  <form method="POST" action="." >
@@ -48,7 +49,17 @@
 {% else %}
     <p>No list yet!</p>
 {% endif %}
+{% if checklists %}<h4>Checklists</h4>
+{% for obj in checklists %}
 
+    <div class="row p-1 mb-2 bg-light text-dark">
+        <div class="col-md-8 col-xs-8">
+        <a  href="{% url 'lists:items_list' pk=obj.pk %}">
+            ({{ obj.id }}) {{ obj.name }}</a> <p>Edit Name</p> <p>Edit List</p>
+        </div>
+    </div>
+{% endfor %}
+{% endif %}
 <script type="text/javascript">
 
 function confirm_action(in_message) {

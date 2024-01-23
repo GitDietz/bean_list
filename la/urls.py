@@ -7,7 +7,7 @@ from django.views import defaults as default_views
 from .views_list import (items_list, item_create, item_edit,
                          list_detail, user_lists)
 from .views_merchant import merchant_create, merchant_list, merchant_update, merchant_delete
-
+from .views_checklist import add_checklist
 app_name = 'lists'
 
 urlpatterns = [
@@ -29,4 +29,6 @@ urlpatterns = [
     re_path(r'merchant_edit/(?P<pk>\d+)', merchant_update, name='merchant_update'),
     re_path(r'merchant_delete/(?P<pk>\d+)', merchant_delete, name='merchant_delete'),
 
+    # checklist
+    path('add_checklist', add_checklist, name='add_checklist'),
     ]

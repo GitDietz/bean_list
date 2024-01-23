@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
 
 from .forms import NewListCreateForm, ItemForm
-from .models import Item, Merchant, List, Support
+from .models import Item, Merchant, List, MasterList
 from .utils import in_post
 
 import logging
@@ -96,11 +96,13 @@ def user_lists(request):
     log.info(f'user = {request.user.username}')
     managed_list = List.objects.managed_by(request.user)
     member_list = List.objects.member_of(request.user)
+    checklists = MasterList.objects.member_of(request.user)
     notice = ''
     context = {
         'title': 'Lists you are linked to',
         'managed_list': managed_list,
         'member_list': member_list,
+        'checklists': checklists,
         'notice': notice,
     }
     return render(request, 'user_lists.html', context)

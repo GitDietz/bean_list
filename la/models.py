@@ -4,6 +4,11 @@ from django.db.models.functions import Lower
 from django.conf import settings
 from django.urls import reverse
 
+CONFIRMATION = (
+    ('Y', 'Yes'),
+    ('N', 'No'),
+    ('I', 'Disregard')
+)
 
 # ## Model Managers ## #
 class CategoryManager(models.Manager):
@@ -226,3 +231,84 @@ class ReferenceItem(models.Model):
     def __str__(self):
         label = self.category + ':' + self.description.title()
         return str(label)
+
+
+#   Checklist items - will be in a master list and then checked off
+
+
+class MasterListManager(models.Manager):
+    def all(self):
+        qs = super(MasterListManager, self).all()
+        return qs
+
+    def filter_by_instance(self, instance):
+        obj_id = instance.id
+        qs = super(MasterListManager, self).filter(object_id=obj_id)
+        return qs
+
+    def get_by_id(self, pk):
+        qs = super(MasterListManager, self).filter(object_id=pk)
+        return qs
+
+    def managed_by(self, user):
+        qs = super(MasterListManager, self).filter(manager=user)
+        return qs
+
+    def create_group(self, name, manager):
+        new_group = self.create(name=name, manager=manager, disabled=True)
+        return new_group
+
+    def member_of(self, user):
+        qs = super(MasterListManager, self).filter(members=user)
+        return qs
+
+    def leaders(self, user):
+        qs = super(MasterListManager, self).filter(leaders=user)
+        return qs
+
+
+class MasterList(models.Model):
+    """
+    The list object - a container for many items that are related
+    contains the check-off items
+    """
+    name = models.CharField(max_length=100, unique=True)
+    purpose = models.CharField(max_length=200, blank=False)
+    date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
+    manager = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, related_name='master_manage_by', on_delete=models.CASCADE)
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='master_member_of')
+    leaders = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='master_leader_of')
+    disabled = models.BooleanField(default=False)
+    is_master = models.BooleanField(default=False)
+    # this means it contains a list not often updated generates a new one each time required
+    objects = MasterListManager()
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name.title()
+
+
+class MasterCategories(models.Model):
+    description = models.CharField(max_length=100)
+    list = models.ForeignKey(MasterList, on_delete=models.PROTECT)
+
+    class Meta:
+        ordering = ['description']
+
+    def __str__(self):
+        return self.description.title()
+
+
+class MasterItem(models.Model):
+    category = models.ForeignKey(MasterCategories, on_delete=models.PROTECT)
+    description = models.CharField(max_length=100)
+    quantity_plan = models.CharField(max_length=30, blank=True, null=True, default='1')
+    quantity_actual = models.CharField(max_length=30, blank=True, null=True, default='1')
+    confirmed = models.CharField(max_length=10, blank=False, null=False, default='No', choices=CONFIRMATION)
+    list = models.ForeignKey(MasterList, blank=False, null=False, on_delete=models.CASCADE)
+    # objects = ItemManager()
+
+    class Meta:
+        ordering = ['category', 'description']

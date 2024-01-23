@@ -1,3 +1,6 @@
+23/1/24 Start with camp list
+Master list editing
+
 --on merchant list add link back to the list
 --on item add view the back to list link goes elswhere not http://127.0.0.1:8000/lists/items_list/1
 --add the other 3 users

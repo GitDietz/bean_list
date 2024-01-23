@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q
 
 from django.utils.safestring import mark_safe
-from .models import Item, Merchant, List, Support, ReferenceItem, Category
+from .models import Item, Merchant, List, MasterList, MasterCategories, MasterItem
 
 
 class NewListCreateForm(forms.ModelForm):
@@ -77,3 +77,9 @@ class MerchantForm(forms.ModelForm):
     class Meta:
         model = Merchant
         fields = ['name']
+
+
+class ChecklistForm(forms.ModelForm):
+    class Meta:
+        model = MasterList
+        fields = ['name', 'purpose']
